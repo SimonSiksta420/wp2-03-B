@@ -1,10 +1,11 @@
 <?php 
  $submit = filter_input(INPUT_POST, 'submit');
- $amount = filter_input(INPUT_POST, 'amount');
+ $penize = filter_input(INPUT_POST, 'penize');
  $switch = filter_input(INPUT_POST, 'converter');
  define('EUR_CZK', 27);
  define('USD_CZK', 23);
  define('GBP_CZK', 30);
+ 
  ?>
 <!DOCTYPE html>
 <html lang="cz">
@@ -15,6 +16,36 @@
 </head>
 
 <body>
+
+<?php
+
+switch ($switch) {
+    case 'czkdoeuro':
+        $money = $penize / EUR_CZK;
+        break;
+    
+    case 'eurodoczk':
+        $money = $penize * EUR_CZK;
+        break;
+
+    case 'czkdousd':
+        $money = $penize / USD_CZK;
+        break;
+        
+    case 'usddoczk':
+        $money = $penize * USD_CZK;
+        break;
+
+    case 'czkdogp':
+        $money = $penize / GBP_CZK;
+        break;
+            
+    case 'gpdoczk':
+        $money = $penize * GBP_CZK;
+        break;
+        
+}
+?>
 
 <?php
 
@@ -31,8 +62,8 @@ if(isset($submit)) { ?>
  <p> Euro do czk <input type="radio" value="eurodoczk" name="converter"> </p>
  <p> Czk do USD <input type="radio" value="czkdousd" name="converter"> </p>
  <p> USD do Czk  <input type="radio" value="usddoczk" name="converter"> </p>
- <p> GP do Czk <input type="radio" value="czkdousd" name="converter"> </p>
- <p> Czk do GP  <input type="radio" value="usddoczk" name="converter"> </p>
+ <p> GP do Czk <input type="radio" value="czkdogp" name="converter"> </p>
+ <p> Czk do GP  <input type="radio" value="gpdoczk" name="converter"> </p>
 
 
  <input type="submit" name="submit" value="Odeslat">
